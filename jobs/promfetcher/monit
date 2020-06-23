@@ -1,0 +1,5 @@
+check process promfetcher
+  with pidfile   /var/vcap/sys/run/bpm/promfetcher/promfetcher.pid
+  start program "/var/vcap/jobs/bpm/bin/bpm start promfetcher"
+  stop program  "/var/vcap/jobs/bpm/bin/bpm stop  promfetcher"
+  group vcap

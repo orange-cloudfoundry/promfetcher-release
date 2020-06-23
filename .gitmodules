@@ -1,0 +1,3 @@
+[submodule "src/promfetcher"]
+	path = src/promfetcher
+	url = https://github.com/orange-cloudfoundry/promfetcher.git

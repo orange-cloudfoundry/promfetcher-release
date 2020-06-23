@@ -1,0 +1,9 @@
+- type: remove
+  path: /instance_groups/name=promfetcher/jobs/name=promfetch-broker-registrar
+
+- type: replace
+  path: /instance_groups/name=promfetcher/jobs/name=promfetcher/properties/promfetcher/broker/enable?
+  value: false
+
+- type: remove
+  path: /instance_groups/name=promfetcher/jobs/name=promfetcher/properties/promfetcher/database

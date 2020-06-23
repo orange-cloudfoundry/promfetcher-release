@@ -1,0 +1,17 @@
+- type: replace
+  path: /instance_groups/name=promfetcher/jobs/-
+  value:
+    name: promfetcher
+    release: routing
+    consumes:
+      nats:
+        from: nats
+    properties:
+      route_registrar:
+        routes:
+          - name: promfetcher
+            registration_interval: 20s
+            server_cert_domain_san: "promfetcher.((system_domain))"
+            tls_port: 443
+            uris:
+              - promfetcher.((system_domain))

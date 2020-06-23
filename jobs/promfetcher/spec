@@ -1,0 +1,123 @@
+---
+name: promfetcher
+
+templates:
+  dns/aliases.json.erb: dns/aliases.json
+  bpm.yml: config/bpm.yml
+  config.yml.erb: config/config.yml
+
+packages:
+  - promfetcher
+
+properties:
+  gorouter.domain:
+    description: |
+      Domain where to found gorouters
+    default: "bosh"
+  gorouter.network:
+    description: |
+      Network where to found gorouters
+    default: "default"
+  gorouter.deployment:
+    description: |
+      Deployment where to found gorouters
+    default: "cf"
+  gorouter.instance_group:
+    description: |
+      Instance group where to found gorouters
+    default: "router"
+
+
+  promfetcher.port:
+    default: 443
+    description: |
+      Port for listening
+  promfetcher.base_url:
+    default: ""
+    description: |
+      External url which give docs url to user
+      This is an url pointing on this service of course
+      using it let you separate logs part from user part
+  promfetcher.broker.enable:
+    description: If set to false broker will not become useable but database can be remove
+    default: true
+  promfetcher.broker.username:
+    description: Broker username basic auth
+  promfetcher.broker.password:
+    description: Broker pass basic auth
+  promfetcher.broker.service_id:
+    description: Broker service id
+    default: e44a55b7-b532-4247-89f3-4ea92054b793
+  promfetcher.broker.plan_id:
+    description: Broker plan id
+    default: 3294e4fa-42b3-4505-b289-8fb3695b5b3a
+
+  promfetcher.skip_ssl_validation:
+    description: "not used"
+    default: false
+  promfetcher.enable_ssl:
+    description: "not used"
+    default: true
+
+  promfetcher.max_idle_connections:
+    default: 100
+    description: |
+      When a number greater than zero, keepalives are enabled, and Gorouter will keep up to this number of idle keepalive connections open across all backends.
+      When keepalive connections are enabled, the maximum number of idle keepalive connections Gorouter will keep open to an individual backend is 100, which cannot be changed.
+  promfetcher.disable_keep_alives:
+    description: "Disable keep alive"
+    default: false
+
+  promfetcher.database.user:
+    description: ""
+  promfetcher.database.password:
+    description: ""
+  promfetcher.database.host:
+    description: ""
+    default: "sql-db.service.cf.internal"
+  promfetcher.database.name:
+    description: ""
+  promfetcher.database.port:
+    description: ""
+    default: 3306
+  promfetcher.database.cnx.max_open:
+    description: "Set the maximum number of open connections to the database"
+    default: "10"
+  promfetcher.database.cnx.max_idle:
+    description: "Set the maximum number of connections in the idle"
+    default: "5"
+  promfetcher.database.cnx.max_life:
+    description: "Set the maximum amount of time a connection may be reused. this is a duration which must be write like: `1h` for one hour or `1d` for one day ..."
+    default: "1h"
+  promfetcher.log_level:
+    description: |
+      log level to use for server
+      you can chose: `trace`, `debug`, `info`, `warn`, `error`, `fatal` or `panic`
+    default: "info"
+
+  promfetcher.tls_pem.private_key:
+    description: "private key for serving TLS requests. Required if promfetcher.enable_ssl is true."
+  promfetcher.tls_pem.cert_chain:
+    description: "certificate for serving TLS requests. Required if promfetcher.enable_ssl is true."
+  promfetcher.ca_certs:
+    description: "Required. String of concatenated certificate authorities in PEM format, used to validate certificates provided by remote systems. By default, Gorouter will trust certificates signed by well-known CAs and by CA certificates installed on the filesystem."
+
+  promfetcher.backends.cert_chain:
+    description: Certificate chain used for client authentication to TLS-registered backends.  In PEM format.
+  promfetcher.backends.private_key:
+    description: Private key used for client authentication to TLS-registered backends.  In PEM format.
+  promfetcher.backends.max_conns:
+    description: "Maximum concurrent TCP connections per backend. When set to 0 there is no limit"
+    default: 500
+
+  promfetcher.gorouter.host:
+    description: "host to gorouter to connect"
+    default: gorouter.service.cf.internal
+  promfetcher.gorouter.port:
+    description: "port to gorouter to connect"
+    default: 8080
+  promfetcher.gorouter.user:
+    description: "username to gorouter to connect"
+    default: "router-status"
+  promfetcher.gorouter.pass:
+    description: "username to gorouter to connect"

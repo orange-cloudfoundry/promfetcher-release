@@ -1,0 +1,10 @@
+<%
+def canonicalize(str)
+  str.downcase.gsub(/_/, "-").gsub(/[^a-z0-9\-\*]/, "")
+end
+%>
+{
+  "gorouter.service.cf.internal": [
+    "q-s4.<%= canonicalize(p('gorouter.instance_group')) %>.<%= canonicalize(p('gorouter.network')) %>.<%= canonicalize(p('gorouter.deployment')) %>.<%= canonicalize(p('gorouter.domain')) %>"
+  ]
+}

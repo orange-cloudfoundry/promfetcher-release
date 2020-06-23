@@ -1,0 +1,26 @@
+---
+name: bbr-promfetcherdb
+
+templates:
+  bbr.json.erb: config/bbr.json
+  backup.sh.erb: bin/bbr/backup
+  restore.sh.erb: bin/bbr/restore
+
+packages: []
+
+properties:
+  release_level_backup:
+    default: false
+    description: "Include promfetcher DB in backup and restore operations"
+  promfetcher.database.user:
+    description: ""
+  promfetcher.database.password:
+    description: ""
+  promfetcher.database.host:
+    description: ""
+    default: "sql-db.service.cf.internal"
+  promfetcher.database.name:
+    description: ""
+  promfetcher.database.port:
+    description: ""
+    default: 3306

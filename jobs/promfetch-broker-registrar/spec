@@ -1,0 +1,25 @@
+---
+name: promfetch-broker-registrar
+packages:
+  - cf-cli-6-linux
+templates:
+  errand.sh.erb: bin/run
+properties:
+  cf.api_url:
+    description: 'Full URL of Cloud Foundry API'
+    example: 'https://api.your-domain.example.com'
+  cf.skip_ssl_validation:
+    description: 'Skip SSL validation when connecting to Cloud Foundry API'
+    default: false
+  cf.username:
+    description: 'Username of the admin user'
+  cf.password:
+    description: 'Password of the admin user'
+  promfetcher.base_url:
+    description: 'Base url in the form https://url.promfetcher.com:443'
+  promfetcher.broker.username:
+    description: 'Basic Auth username for the service broker'
+    default: admin
+  promfetcher.broker.password:
+    description: 'Basic Auth password for the service broker'
+

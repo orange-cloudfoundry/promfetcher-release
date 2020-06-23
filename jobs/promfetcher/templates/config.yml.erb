@@ -1,0 +1,75 @@
+---
+gorouter:
+  host: <%= p("promfetcher.gorouter.host") %>
+  port: <%= p("promfetcher.gorouter.port") %>
+  user: <%= p("promfetcher.gorouter.user") %>
+  pass: <%= p("promfetcher.gorouter.pass") %>
+<%=
+  backend_cert_chain = ''
+  backend_private_key = ''
+  if_p("promfetcher.backends.cert_chain") { |val| backend_cert_chain = val }
+  if_p("promfetcher.backends.private_key") { |val| backend_private_key = val }
+
+  if (backend_cert_chain != '') ^ (backend_private_key != '')
+    raise 'backends.cert_chain and backends.private_key must be both provided or not at all'
+  end
+
+  backends = {
+    "max_conns" => p("promfetcher.backends.max_conns"),
+    "cert_chain" => backend_cert_chain,
+    "private_key" => backend_private_key,
+  }
+
+  { "backends" => backends }.to_yaml[3..-1]
+%>
+
+<% if p("promfetcher.enable_ssl") %>
+<%=
+  tls_cert_chain = ''
+  tls_private_key = ''
+  if_p("promfetcher.tls_pem.cert_chain") { |val| tls_cert_chain = val }
+  if_p("promfetcher.tls_pem.private_key") { |val| tls_private_key = val }
+
+  if (tls_cert_chain != '') ^ (tls_private_key != '')
+    raise 'tls_pem.cert_chain and tls_pem.private_key must be both provided'
+  end
+
+  tls_pem = {
+    "cert_chain" => tls_cert_chain,
+    "private_key" => tls_private_key,
+  }
+
+  { "tls_pem" => tls_pem }.to_yaml[3..-1]
+%>
+<% end %>
+<% if p("promfetcher.ca_certs")
+ ca_certs = p("promfetcher.ca_certs")
+ if !ca_certs.is_a?(String)
+   raise 'ca_certs must be provided as a single string block'
+ end
+%>
+<%= { 'ca_certs' => ca_certs }.to_yaml[3..-1] %>
+<% end %>
+skip_ssl_validation: <%= p("promfetcher.skip_ssl_validation") %>
+enable_ssl: <%= p("promfetcher.enable_ssl") %>
+base_url: <%= p("promfetcher.base_url") %>
+port: <%= p("promfetcher.port") %>
+logging:
+  level: <%= p("promfetcher.log_level") %>
+  in_json: true
+
+<% if p("promfetcher.broker.enable") %>
+db_conn: mysql://<%= p("promfetcher.database.user") %>:<%= p("promfetcher.database.password") %>@<%= p("promfetcher.database.host") %>:<%= p("promfetcher.database.port") %>/<%= p("promfetcher.database.name") %>
+sql_cnx_max_idle: <%= p("promfetcher.database.cnx.max_idle") %>
+sql_cnx_max_open: <%= p("promfetcher.database.cnx.max_open") %>
+sql_cnx_max_life: <%= p("promfetcher.database.cnx.max_life") %>
+<% end %>
+disable_keep_alives: <%= p("promfetcher.disable_keep_alives") %>
+max_idle_conns: <%= p("promfetcher.max_idle_connections") %>
+max_idle_conns_per_host: 100
+
+broker:
+  broker_service_id: <%= p("promfetcher.broker.service_id") %>
+  broker_plan_id: <%= p("promfetcher.broker.plan_id") %>
+  user: <%= p("promfetcher.broker.username") %>
+  pass: <%= p("promfetcher.broker.password") %>

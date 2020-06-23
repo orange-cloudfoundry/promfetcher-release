@@ -1,0 +1,84 @@
+- type: replace
+  path: /instance_groups/-
+  value:
+    name: promfetcher
+    azs: [z1,z2,z3]
+    instances: 3
+    networks:
+      - name: default
+    stemcell: default
+    vm_type: minimal
+    jobs:
+      - name: bpm
+        release: bpm
+      - name: promfetch-broker-registrar
+        release: promfetcher
+        properties:
+          cf:
+            api_url: https://api.((system_domain))
+            username: admin
+            password: ((cf_admin_password))
+            skip_ssl_validation: true
+          promfetcher:
+            base_url: https://promfetcher.((system_domain))
+            broker:
+              name: promfetcher
+              username: promfetcher-broker
+              password: ((promfetcher_broker_password))
+      - name: promfetcher
+        release: promfetcher
+        properties:
+          promfetcher:
+            backends:
+              cert_chain: ((gorouter_backend_tls.certificate))
+              private_key: ((gorouter_backend_tls.private_key))
+            gorouter:
+              user: router-status
+              pass: ((router_status_password))
+            tls_pem:
+              cert_chain: ((router_ssl.certificate))
+              private_key: ((router_ssl.private_key))
+            ca_certs: |
+              ((diego_instance_identity_ca.ca))
+              ((cc_tls.ca))
+              ((uaa_ssl.ca))
+              ((credhub_ca.certificate))
+              ((network_policy_server_external.ca))
+            broker:
+              enable: true
+              username: promfetcher-broker
+              password: ((promfetcher_broker_password))
+            skip_ssl_validation: false
+            database:
+              user: promfetcher
+              password: ((promfetcher_mysql_password))
+              host: sql-db.service.cf.internal
+              name: promfetcher
+            base_url: https://promfetcher.((system_domain))
+
+
+- type: replace
+  path: /instance_groups/name=database/jobs/name=pxc-mysql/properties/seeded_databases/-
+  value:
+    name: promfetcher
+    username: promfetcher
+    password: ((promfetcher_mysql_password))
+
+- type: replace
+  path: /variables/-
+  value:
+    name: promfetcher_mysql_password
+    type: password
+
+- type: replace
+  path: /variables/-
+  value:
+    name: promfetcher_broker_password
+    type: password
+
+- type: replace
+  path: /releases/-
+  value:
+    name: promfetcher
+    version: latest
+    url: https://github.com/orange-cloudfoundry/promfetcher/releases/download/v0.1.0/promfetcher-0.1.0.tgz

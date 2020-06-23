@@ -1,0 +1,25 @@
+groups:
+  - name: promfetcher
+    rules:
+      - alert: PromfetcherNoRouteScrape
+        expr: sum(rate(promfetch_scrape_route_failed_total[10m])) by (instance) > <%= p('promfetcher_alerts.scrape_routes_error.threshold') %>
+        for: <%= p('promfetcher_alerts.scrape_routes_error.evaluation_time') %>
+        labels:
+          service: promfetcher
+          severity: critical
+        annotations:
+          summary: "Promfetcher cannot retrieve gorouter route table at instance `{{$labels.instance}}`"
+          description: "Promfetcher cannot retrieve gorouter route table at instance `{{$labels.instance}}` during the last <%= p('promfetcher_alerts.scrape_routes_error.evaluation_time') %>"
+
+      - alert: PromfetcherTooManyFailureDuringFetch
+        expr: sum(rate(promfetch_metric_fetch_failed_total[10m])) by (instance, organization_name, space_name, app_name, index) > <%= p('promfetcher_alerts.errors.threshold') %>
+        for: <%= p('promfetcher_alerts.errors.evaluation_time') %>
+        labels:
+          service: promfetcher
+          severity: critical
+        annotations:
+          summary: "Promfetcher have too many unknown failure at instance `{{$labels.instance}}` for app at `{{$labels.organization_name}}/{{$labels.space_name}}/{{$labels.app_name}}/{{$labels.index}}` during app metrics fetch"
+          description: |
+            Promfetcher have too many unknown failure at instance `{{$labels.instance}}` (<%= p('promfetcher_alerts.errors.threshold') %> failures) for app at `{{$labels.organization_name}}/{{$labels.space_name}}/{{$labels.app_name}}/{{$labels.index}}`
+            during the last <%= p('promfetcher_alerts.errors.evaluation_time') %>. You must mitigate the risk by looking if many app have same errors, if not it is just badly done for some app."
+

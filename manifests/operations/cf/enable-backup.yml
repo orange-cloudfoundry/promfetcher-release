@@ -1,0 +1,13 @@
+- type: replace
+  path: /instance_groups/name=backup-restore/jobs/-
+  value:
+    name: bbr-promfetcherdb
+    properties:
+      release_level_backup: true
+      promfetcher:
+        database:
+          user: promfetcher
+          password: ((promfetcher_broker_password))
+          host: sql-db.service.cf.internal
+          name: promfetcher
+    release: promfetcher

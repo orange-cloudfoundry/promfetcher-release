@@ -1,0 +1,8 @@
+processes:
+  - name: promfetcher
+    executable: /var/vcap/packages/promfetcher/bin/promfetcher
+    args:
+      - "-c"
+      - "/var/vcap/jobs/promfetcher/config/config.yml"
+    capabilities:
+      - NET_BIND_SERVICE

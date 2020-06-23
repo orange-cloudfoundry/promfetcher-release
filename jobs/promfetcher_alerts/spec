@@ -1,0 +1,23 @@
+---
+name: promfetcher_alerts
+
+packages: []
+
+templates:
+  promfetcher.alerts.yml: promfetcher.alerts.yml
+
+properties:
+  promfetcher_alerts.scrape_routes_error.threshold:
+    description: "Promfetcher no route scrape threshold"
+    default: 0
+  promfetcher_alerts.scrape_routes_error.evaluation_time:
+    description: "Promfetcher no route scrape evaluation time"
+    default: 5m
+
+  promfetcher_alerts.errors.threshold:
+    description: "Promfetcher too many failure during fetch threshold"
+    default: 0
+  promfetcher_alerts.errors.evaluation_time:
+    description: "Promfetcher too many failure during fetch evaluation time"
+    default: 15m
+

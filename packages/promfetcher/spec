@@ -1,0 +1,8 @@
+---
+name: promfetcher
+
+dependencies:
+  - golang-1-linux
+
+files:
+  - promfetcher/**

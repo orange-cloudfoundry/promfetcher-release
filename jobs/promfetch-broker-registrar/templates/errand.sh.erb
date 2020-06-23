@@ -1,0 +1,50 @@
+#!/bin/bash
+
+set -eu
+
+CF_BIN=/var/vcap/packages/cf-cli-6-linux/bin/cf
+CF_API_URL='<%= p("cf.api_url") %>'
+CF_ADMIN_USERNAME='<%= p("cf.username") %>'
+CF_ADMIN_PASSWORD='<%= p("cf.password") %>'
+CF_SKIP_SSL_VALIDATION='<%= p("cf.skip_ssl_validation") %>'
+
+BROKER_NAME='promfetcher'
+BROKER_URL='<%= p("promfetcher.base_url") %>/broker'
+BROKER_USERNAME='<%= p("promfetcher.broker.username") %>'
+BROKER_PASSWORD='<%= p("promfetcher.broker.password") %>'
+
+function updateServiceBroker() {
+  echo "Service broker already exists - updating broker"
+  ${CF_BIN} update-service-broker ${BROKER_NAME} ${BROKER_USERNAME} ${BROKER_PASSWORD} ${BROKER_URL}
+}
+
+function createServiceBroker(){
+  echo "Service broker does not exist - creating broker"
+  ${CF_BIN} create-service-broker ${BROKER_NAME} ${BROKER_USERNAME} ${BROKER_PASSWORD} ${BROKER_URL}
+}
+
+export PATH=/var/vcap/packages/cli/bin
+export CF_DIAL_TIMEOUT=30
+
+echo "CF_API_URL=${CF_API_URL}"
+echo "CF_SKIP_SSL_VALIDATION=${CF_SKIP_SSL_VALIDATION}"
+echo "CF_ADMIN_USERNAME=${CF_ADMIN_USERNAME}"
+echo "BROKER_NAME=${BROKER_NAME}"
+echo "BROKER_URL=${BROKER_URL}"
+echo "BROKER_USERNAME=${BROKER_USERNAME}"
+
+if [[ ${CF_SKIP_SSL_VALIDATION} == "true" ]]; then
+  ${CF_BIN} api ${CF_API_URL} --skip-ssl-validation
+else
+  ${CF_BIN} api ${CF_API_URL}
+fi
+
+${CF_BIN} auth \
+  ${CF_ADMIN_USERNAME} \
+  ${CF_ADMIN_PASSWORD}
+
+# Create broker or update if exists
+createServiceBroker || updateServiceBroker
+
+# Loop over public plans and enable
+${CF_BIN} enable-service-access ${BROKER_NAME}
