@@ -1,6 +1,6 @@
 # Promfetcher-release
 
-this is the bosh release for deploying [promfetcher](https://github.com/orange-cloudfoundry/promfetcher) alongside cloud foundry.
+This is the bosh release for deploying [promfetcher](https://github.com/orange-cloudfoundry/promfetcher) alongside cloud foundry.
 
 [promfetcher](https://github.com/orange-cloudfoundry/promfetcher) was made for [cloud foundry](https://cloudfoundry.org) and the idea behind is to give ability to fetch 
 metrics from all app instances in a cloud foundry environment.
