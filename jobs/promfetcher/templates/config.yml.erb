@@ -1,9 +1,5 @@
 ---
-gorouter:
-  host: <%= p("promfetcher.gorouter.host") %>
-  port: <%= p("promfetcher.gorouter.port") %>
-  user: <%= p("promfetcher.gorouter.user") %>
-  pass: <%= p("promfetcher.gorouter.pass") %>
+gorouters: <%= p('promfetcher.gorouters').to_json %>
 <%=
   backend_cert_chain = ''
   backend_private_key = ''

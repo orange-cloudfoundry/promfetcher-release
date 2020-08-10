@@ -10,22 +10,14 @@ packages:
   - promfetcher
 
 properties:
-  gorouter.domain:
-    description: |
-      Domain where to found gorouters
-    default: "bosh"
-  gorouter.network:
-    description: |
-      Network where to found gorouters
-    default: "default"
-  gorouter.deployment:
-    description: |
-      Deployment where to found gorouters
-    default: "cf"
-  gorouter.instance_group:
-    description: |
-      Instance group where to found gorouters
-    default: "router"
+  gorouter_dns:
+    description: "Bosh dns entries to find set of gorouters"
+    default:
+      - entry: "gorouter.service.cf.internal"
+        domain: "bosh"
+        network: "default"
+        deployment: "cf"
+        instance_group: "router"
 
 
   promfetcher.port:
@@ -110,14 +102,10 @@ properties:
     description: "Maximum concurrent TCP connections per backend. When set to 0 there is no limit"
     default: 500
 
-  promfetcher.gorouter.host:
-    description: "host to gorouter to connect"
-    default: gorouter.service.cf.internal
-  promfetcher.gorouter.port:
-    description: "port to gorouter to connect"
-    default: 8080
-  promfetcher.gorouter.user:
-    description: "username to gorouter to connect"
-    default: "router-status"
-  promfetcher.gorouter.pass:
-    description: "username to gorouter to connect"
+  promfetcher.gorouters:
+    description: "Gorouter to connect to"
+    default:
+      - host: gorouter.service.cf.internal
+        port: 8080
+        user: router-status
+        password: ""

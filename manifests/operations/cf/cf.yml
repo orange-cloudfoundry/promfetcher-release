@@ -33,8 +33,10 @@
               cert_chain: ((gorouter_backend_tls.certificate))
               private_key: ((gorouter_backend_tls.private_key))
             gorouter:
-              user: router-status
-              pass: ((router_status_password))
+              - host: gorouter.service.cf.internal
+                port: 8080
+                user: router-status
+                pass: ((router_status_password))
             tls_pem:
               cert_chain: ((router_ssl.certificate))
               private_key: ((router_ssl.private_key))
@@ -81,4 +83,4 @@
   value:
     name: promfetcher
     version: latest
-    url: https://github.com/orange-cloudfoundry/promfetcher/releases/download/v0.1.0/promfetcher-0.1.0.tgz
+    url: https://github.com/orange-cloudfoundry/promfetcher/releases/download/v0.2.0/promfetcher-0.2.0.tgz

@@ -2,9 +2,13 @@
 def canonicalize(str)
   str.downcase.gsub(/_/, "-").gsub(/[^a-z0-9\-\*]/, "")
 end
+entries = {}
+p('gorouter_dns', []).each do |dns_entry|
+  instance_group = canonicalize(dns_entry['instance_group'])
+  network = canonicalize(dns_entry['network'])
+  deployment = canonicalize(dns_entry['deployment'])
+  domain = canonicalize(dns_entry['domain'])
+  entries[dns_entry['entry']] = ["q-s4.#{instance_group}.#{network}.#{deployment}.#{domain}"]
+  end
 %>
-{
-  "gorouter.service.cf.internal": [
-    "q-s4.<%= canonicalize(p('gorouter.instance_group')) %>.<%= canonicalize(p('gorouter.network')) %>.<%= canonicalize(p('gorouter.deployment')) %>.<%= canonicalize(p('gorouter.domain')) %>"
-  ]
-}
+<%= entries.to_json %>
