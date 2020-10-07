@@ -1,0 +1,48 @@
+name: promfetcher
+version: 0.2.1
+commit_hash: 469761a
+uncommitted_changes: false
+jobs:
+- name: bbr-promfetcherdb
+  version: 5b695ad1b523a6d74ae9da254aa84aadf27e309d387e6d59cb0e80ccebe3cb09
+  fingerprint: 5b695ad1b523a6d74ae9da254aa84aadf27e309d387e6d59cb0e80ccebe3cb09
+  sha1: sha256:58040fe5ae04e07d2aaf682f84b05a7d96c2a357ebe875735353f87b7a40ac84
+  packages: []
+- name: promfetch-broker-registrar
+  version: 28ae6f544593232b07fea1eafb5f54d5c709423484b909677ddefe25bf9cedd9
+  fingerprint: 28ae6f544593232b07fea1eafb5f54d5c709423484b909677ddefe25bf9cedd9
+  sha1: sha256:e209eeb44719ff6b2ed6abefe8c6ca46fd4b365783cd7b7908c6710728337421
+  packages:
+  - cf-cli-6-linux
+- name: promfetcher
+  version: 85e062b4c0f35d1fe3a6d2e60a7bfbb107ae6bc013f49ab491d240fc9df6c69b
+  fingerprint: 85e062b4c0f35d1fe3a6d2e60a7bfbb107ae6bc013f49ab491d240fc9df6c69b
+  sha1: sha256:dc03aea1549c073c654911990cc172a60e5634a341f37e4ab39685887690a7ee
+  packages:
+  - promfetcher
+- name: promfetcher_alerts
+  version: c4235b4d74a977cf90d681903f1dc17e4d5483376914e2b15227e8752da5b058
+  fingerprint: c4235b4d74a977cf90d681903f1dc17e4d5483376914e2b15227e8752da5b058
+  sha1: sha256:eb40a35218a0978f7ffa0678c699b6d6b848fe4806a29d0c3662a4669c1f10a7
+  packages: []
+packages:
+- name: cf-cli-6-linux
+  version: af6517f138b3ed0584b263f6273f30f22f6e5c9d
+  fingerprint: af6517f138b3ed0584b263f6273f30f22f6e5c9d
+  sha1: 49c68230bc07d100e34e8505d637e077c5dd68ed
+  dependencies: []
+- name: golang-1-linux
+  version: ef771f8c7b5d835ebfa08a1f7a485b0db7928d013ec69d911ca88bb12e6c1261
+  fingerprint: ef771f8c7b5d835ebfa08a1f7a485b0db7928d013ec69d911ca88bb12e6c1261
+  sha1: sha256:a67bdc8f7b70b4234461ab49f67fa05f2a33a3f93fcddf35f1a98a73ffb2c1b7
+  dependencies: []
+- name: promfetcher
+  version: 3bf96e9c9b47881d677a2f2bf732757e4e4334c90e83817bab8a541c50b8f67e
+  fingerprint: 3bf96e9c9b47881d677a2f2bf732757e4e4334c90e83817bab8a541c50b8f67e
+  sha1: sha256:c3f5f496d9d21cf0d5583409487e46302e5193aa9be0802be3ee7fa30232a40d
+  dependencies:
+  - golang-1-linux
+license:
+  version: bb07be9bd93bcf33eb7b7beb8874200b8b9a7f4335f5b315c53c4399c1bcbc1d
+  fingerprint: bb07be9bd93bcf33eb7b7beb8874200b8b9a7f4335f5b315c53c4399c1bcbc1d
+  sha1: sha256:51517c19f0be78efd6ce3941644e05646396303a6ffb1a72824c406040396010
