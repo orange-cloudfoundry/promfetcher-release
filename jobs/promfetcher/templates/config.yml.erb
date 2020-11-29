@@ -69,3 +69,5 @@ broker:
   broker_plan_id: <%= p("promfetcher.broker.plan_id") %>
   user: <%= p("promfetcher.broker.username") %>
   pass: <%= p("promfetcher.broker.password") %>
+
+external_exporters: <%= p('promfetcher.external_exporters').to_json %>

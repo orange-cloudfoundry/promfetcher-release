@@ -109,3 +109,31 @@ properties:
         port: 8080
         user: router-status
         password: ""
+
+  promfetcher.external_exporters:
+    description: |
+      external exporters to retrieve metrics from which let you take route tags and use it on them
+      This was made to retrieve metric value found in cloud foundry through https://github.com/orange-cloudfoundry/metric-store-exporter-release
+    default: [ ]
+    example:
+      - name: name-of-exporter
+        # required
+        host: exporter.com:8086
+        # or can be https
+        scheme: http
+        # default to /metrics
+        metrics_path: /metrics
+        # on value you have access to variable as template value (this is go template):
+        #  ProcessType
+        #  ProcessInstanceID
+        #  Component
+        #  SpaceName
+        #  OrganizationID
+        #  ProcessID
+        #  OrganizationName
+        #  SourceID
+        #  AppID
+        #  AppName
+        #  SpaceID
+        params:
+          source_id[]: [ "{{.AppID}}" ]
