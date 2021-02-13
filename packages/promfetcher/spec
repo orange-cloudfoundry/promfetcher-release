@@ -1,8 +1,7 @@
 ---
 name: promfetcher
 
-dependencies:
-  - golang-1-linux
+dependencies: []
 
 files:
-  - promfetcher/**
+  - promfetcher_linux.tar.gz

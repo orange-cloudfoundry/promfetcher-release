@@ -1,15 +1,9 @@
 #!/bin/bash -e
 
 ostype=$(uname  | tr '[:upper:]' '[:lower:]')
-if [ -z "$BOSH_PACKAGES_DIR" ]; then
-    pkg_dir=$(readlink -nf /var/vcap/packages/golang-1-${ostype})
-else
-  pkg_dir=$BOSH_PACKAGES_DIR/golang-1-${ostype}
-fi
-
-source ${pkg_dir}/bosh/compile.env
+bin_name="promfetcher"
+tar_name="${bin_name}_${ostype}.tar.gz"
 
 mkdir -p ${BOSH_INSTALL_TARGET}/bin
-
-cd promfetcher
-go build -mod=vendor -o ${BOSH_INSTALL_TARGET}/bin/promfetcher
+tar zxf ${tar_name} --strip 1 -C ${BOSH_INSTALL_TARGET}
+mv ${BOSH_INSTALL_TARGET}/${bin_name} ${BOSH_INSTALL_TARGET}/bin

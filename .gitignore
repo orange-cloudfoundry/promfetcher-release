@@ -13,3 +13,4 @@ releases/**/*.tgz
 *#
 #*
 *.tgz
+*.tar.gz
