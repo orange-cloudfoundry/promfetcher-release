@@ -30,6 +30,17 @@
     /var/vcap/jobs/promfetcher_alerts/*.alerts.yml
 
 - type: replace
+  path: /instance_groups/name=prometheus2/jobs/name=prometheus2/properties/prometheus/custom_rules?/-
+  value:
+    name: 
+    rules:
+      - record: promfetch_metric_fetch_failed_by_app
+        expr: |
+          sum by(organization_name, space_name, app_name) (rate(promfetch_metric_fetch_failed_total[10m]))
+
+
+
+- type: replace
   path: /releases/-
   value:
     name: promfetcher
