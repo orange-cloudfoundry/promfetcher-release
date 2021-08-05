@@ -1,0 +1,42 @@
+name: promfetcher
+version: 0.6.7
+commit_hash: "4230427"
+uncommitted_changes: false
+jobs:
+- name: bbr-promfetcherdb
+  version: 5b695ad1b523a6d74ae9da254aa84aadf27e309d387e6d59cb0e80ccebe3cb09
+  fingerprint: 5b695ad1b523a6d74ae9da254aa84aadf27e309d387e6d59cb0e80ccebe3cb09
+  sha1: sha256:58040fe5ae04e07d2aaf682f84b05a7d96c2a357ebe875735353f87b7a40ac84
+  packages: []
+- name: promfetch-broker-registrar
+  version: 28ae6f544593232b07fea1eafb5f54d5c709423484b909677ddefe25bf9cedd9
+  fingerprint: 28ae6f544593232b07fea1eafb5f54d5c709423484b909677ddefe25bf9cedd9
+  sha1: sha256:e209eeb44719ff6b2ed6abefe8c6ca46fd4b365783cd7b7908c6710728337421
+  packages:
+  - cf-cli-6-linux
+- name: promfetcher
+  version: 0c1da4a00c6121d9d7d0fea34134bd08a66915337744410049c92152920eff65
+  fingerprint: 0c1da4a00c6121d9d7d0fea34134bd08a66915337744410049c92152920eff65
+  sha1: sha256:b08ccc7fac0e645855a1ecfa48209d01096e47d2e1ae32ec122733264df28fae
+  packages:
+  - promfetcher
+- name: promfetcher_alerts
+  version: 034ec94e07733fcfa707f5f90097ad118b7c477025a33047bff178c12e71cccd
+  fingerprint: 034ec94e07733fcfa707f5f90097ad118b7c477025a33047bff178c12e71cccd
+  sha1: sha256:ea000a20cdce0015008ebc06e8ae5c1ede91ba243f996a6ed4fd1721d25f58bc
+  packages: []
+packages:
+- name: cf-cli-6-linux
+  version: af6517f138b3ed0584b263f6273f30f22f6e5c9d
+  fingerprint: af6517f138b3ed0584b263f6273f30f22f6e5c9d
+  sha1: 49c68230bc07d100e34e8505d637e077c5dd68ed
+  dependencies: []
+- name: promfetcher
+  version: 0a48908ddbfd9f74d2567a214e1afd4c498af19982d72efbef872f81d0a5d8db
+  fingerprint: 0a48908ddbfd9f74d2567a214e1afd4c498af19982d72efbef872f81d0a5d8db
+  sha1: sha256:5df1c957f57f60b7808b00402051704e3cf78470996336d41738bcbcd5adc86a
+  dependencies: []
+license:
+  version: bb07be9bd93bcf33eb7b7beb8874200b8b9a7f4335f5b315c53c4399c1bcbc1d
+  fingerprint: bb07be9bd93bcf33eb7b7beb8874200b8b9a7f4335f5b315c53c4399c1bcbc1d
+  sha1: sha256:51517c19f0be78efd6ce3941644e05646396303a6ffb1a72824c406040396010
