@@ -12,7 +12,7 @@ groups:
           description: "Promfetcher cannot retrieve gorouter route table at instance `{{$labels.instance}}` during the last <%= p('promfetcher_alerts.scrape_routes_error.evaluation_time') %>"
 
       - alert: PromfetcherTooManyFailureDuringFetch
-        expr: sum(rate(promfetch_metric_fetch_failed_total[10m])) by (instance, organization_name, space_name, app_name, index) > <%= p('promfetcher_alerts.errors.threshold') %>
+        expr: (count(promfetch_metric_fetch_failed_by_app > 0) / count(promfetch_metric_fetch_failed_by_app)) > 0.1
         for: <%= p('promfetcher_alerts.errors.evaluation_time') %>
         labels:
           service: promfetcher
