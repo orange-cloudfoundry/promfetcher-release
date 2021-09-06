@@ -20,10 +20,10 @@
         target_label: __address__
 
 - type: replace
-  path: /instance_groups/name=grafana/jobs/name=grafana/properties/grafana/prometheus/dashboard_folders/name=Tools/files?/-
-  value: /var/vcap/job/promfetcher_dashboards/*json
+  path: /instance_groups/name=grafana/jobs/name=grafana/properties/grafana/prometheus/dashboard_folders/name=Tools?/files/-
+  value: /var/vcap/jobs/promfetcher_dashboards/*json
 - type: replace
-  path: /instance_groups/name=grafana/jobs/name=promfetcher_dashboards?
+  path: /instance_groups/name=grafana/jobs/-
   value:
     name: promfetcher_dashboards
     release: promfetcher
@@ -41,13 +41,11 @@
 - type: replace
   path: /instance_groups/name=prometheus2/jobs/name=prometheus2/properties/prometheus/custom_rules?/-
   value:
-    name: 
+    name: prometcher_metrics
     rules:
       - record: promfetch_metric_fetch_failed_by_app
         expr: |
           sum by(organization_name, space_name, app_name) (rate(promfetch_metric_fetch_failed_total[10m]))
-
-
 
 - type: replace
   path: /releases/-
