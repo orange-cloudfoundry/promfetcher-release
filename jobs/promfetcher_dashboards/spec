@@ -1,0 +1,7 @@
+---
+name: promfetcher_dashboards
+templates:
+  promfetcher.json: promfetcher.json
+packages: []
+properties: {}
+...
