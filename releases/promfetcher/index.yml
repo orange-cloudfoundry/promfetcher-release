@@ -51,4 +51,6 @@ builds:
     version: 0.1.1
   e2fb81d7-ebc2-47d6-5716-827bb52e7277:
     version: 0.5.0
+  efbf5457-fe5c-416a-6297-67b72be65999:
+    version: 0.13.0
 format-version: "2"
