@@ -118,7 +118,6 @@ properties:
   promfetcher.external_exporters:
     description: |
       external exporters to retrieve metrics from which let you take route tags and use it on them
-      This was made to retrieve metric value found in cloud foundry through https://github.com/orange-cloudfoundry/metric-store-exporter-release
     default: [ ]
     example:
       - name: name-of-exporter
