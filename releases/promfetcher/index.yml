@@ -147,4 +147,6 @@ builds:
     version: 0.34.0
   f7a10969-9dc1-49cb-7630-77a035be5950:
     version: 0.25.0
+  f7b14355-efb6-4d77-40ce-25c0b256e209:
+    version: 0.45.0
 format-version: "2"
