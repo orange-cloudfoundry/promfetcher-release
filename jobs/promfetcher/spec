@@ -11,15 +11,6 @@ packages:
   - promfetcher
 
 properties:
-  gorouter_dns:
-    description: "Bosh dns entries to find set of gorouters"
-    default:
-      - entry: "gorouter.service.cf.internal"
-        domain: "bosh"
-        network: "default"
-        deployment: "cf"
-        instance_group: "router"
-
 
   promfetcher.port:
     default: 443
@@ -107,13 +98,35 @@ properties:
     description: "Maximum concurrent TCP connections per backend. When set to 0 there is no limit"
     default: 500
 
-  promfetcher.gorouters:
-    description: "Gorouter to connect to"
+  promfetcher.nats.user:
+    description: User name for NATS authentication
+    default: nats
+  promfetcher.nats.password:
+    description: Password for NATS authentication
+  promfetcher.nats.hosts:
+    description: Hostnames (and/or IPs) and port of each NATS cluster member
     default:
-      - host: gorouter.service.cf.internal
-        port: 8080
-        user: router-status
-        password: ""
+      - hostname: nats.service.cf.internal
+        port: 4224
+  promfetcher.nats.tls_enabled:
+    description: When enabled, Promfetcher will prefer to connect to NATS over TLS
+    default: true
+  promfetcher.nats.ca_certs:
+    description: "String of concatenated certificate authorities in PEM format, used to validate certificates presented by NATS."
+  promfetcher.nats.cert_chain:
+    description: Certificate chain used for client authentication to NATS. In PEM format.
+  promfetcher.nats.private_key:
+    description: Private key used for client authentication to NATS. In PEM format.
+
+  promfetcher.droplet_stale_threshold
+    description: "Promfetcher will prune routes that it considers to be stale based upon droplet_stale_threshold value"
+    default: 120s
+  promfetcher.start_response_delay_interval
+    description: |
+      On startup, Promfetcher will delay listening for requests by this duration to increase likelihood that it has a complete routing table before serving requests.
+      Promfetcher also broadcasts the same duration as a recommended interval to registering clients via NATS.
+      This must be less than 60, otherwise monit will mark the process as failed.
+    default: 20s
 
   promfetcher.external_exporters:
     description: |
