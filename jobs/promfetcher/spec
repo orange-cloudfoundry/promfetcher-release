@@ -118,10 +118,10 @@ properties:
   promfetcher.nats.private_key:
     description: Private key used for client authentication to NATS. In PEM format.
 
-  promfetcher.droplet_stale_threshold
+  promfetcher.droplet_stale_threshold:
     description: "Promfetcher will prune routes that it considers to be stale based upon droplet_stale_threshold value"
     default: 120s
-  promfetcher.start_response_delay_interval
+  promfetcher.start_response_delay_interval:
     description: |
       On startup, Promfetcher will delay listening for requests by this duration to increase likelihood that it has a complete routing table before serving requests.
       Promfetcher also broadcasts the same duration as a recommended interval to registering clients via NATS.
