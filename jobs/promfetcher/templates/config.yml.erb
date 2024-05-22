@@ -1,5 +1,17 @@
 ---
-gorouters: <%= p('promfetcher.gorouters').to_json %>
+
+nats:
+  tls_enabled: <%= p("promfetcher.nats.tls_ebabled") %>
+  ca_certs: <%= p("promfetcher.nats.ca_certs") %>
+  cert_chain: <%= p("promfetcher.nats.cert_chain") %>
+  private_key: <%= p("promfetcher.nats.private_key") %>
+  hosts: <%= p("promfetcher.nats.hosts").to_json %>
+  user: <%= p("promfetcher.nats.tls_ebabled") %>
+  pass: <%= p("promfetcher.nats.tls_ebabled") %>
+
+start_response_delay_interval: <%= p("promfetcher.start_response_delay_interval") %>
+droplet_stale_threshold: <%= p("promfetcher.droplet_stale_threshold:") %>
+
 <%=
   backend_cert_chain = ''
   backend_private_key = ''
