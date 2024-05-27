@@ -10,7 +10,7 @@ nats:
   pass: <%= p("promfetcher.nats.password") %>
 
 start_response_delay_interval: <%= p("promfetcher.start_response_delay_interval") %>
-droplet_stale_threshold: <%= p("promfetcher.droplet_stale_threshold:") %>
+droplet_stale_threshold: <%= p("promfetcher.droplet_stale_threshold") %>
 
 <%=
   backend_cert_chain = ''
