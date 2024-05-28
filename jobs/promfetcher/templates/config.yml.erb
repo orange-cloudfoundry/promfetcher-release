@@ -1,13 +1,82 @@
 ---
 
-nats:
-  tls_enabled: <%= p("promfetcher.nats.tls_enabled") %>
-  ca_certs: <%= p("promfetcher.nats.ca_certs") %>
-  cert_chain: <%= p("promfetcher.nats.cert_chain") %>
-  private_key: <%= p("promfetcher.nats.private_key") %>
-  hosts: <%= p("promfetcher.nats.hosts").to_json %>
-  user: <%= p("promfetcher.nats.user") %>
-  pass: <%= p("promfetcher.nats.password") %>
+<%=
+nats = {}
+
+nats_link_name = 'nats'
+if p("nats.tls_enabled")
+  nats_link_name = 'nats-tls'
+
+  nats_ca_certs = property_or_link(
+    'NATS server CA certificate',
+    'nats.ca_certs',
+    "nats.external.tls.ca",
+    link_name=nats_link_name,
+  )
+  if !nats_ca_certs.is_a?(String)
+    raise 'nats.ca_certs must be provided as a single string block'
+  end
+
+  nats_cert_chain = ''
+  nats_private_key = ''
+  if_p("nats.cert_chain") { |val| nats_cert_chain = val }
+  if_p("nats.private_key") { |val| nats_private_key = val }
+
+  if (nats_cert_chain != '') ^ (nats_private_key != '')
+    raise 'nats.cert_chain and nats.private_key must be both provided or not at all'
+  end
+  if !nats_cert_chain.is_a?(String)
+    raise 'nats.cert_chain must be provided as a single string block'
+  end
+
+  nats['tls_enabled'] = true
+  nats['ca_certs'] = nats_ca_certs
+  nats['cert_chain'] = nats_cert_chain
+  nats['private_key'] = nats_private_key
+end
+
+nats_port = property_or_link(
+  'NATS server port number',
+  'nats.port',
+  "nats.port",
+  link_name=nats_link_name,
+)
+
+nats_machines = nil
+if_p('nats.machines') do |ips|
+  nats_machines = ips.compact
+end.else do
+  link(nats_link_name).if_p('nats.hostname') do |hostname|
+    nats_machines = [hostname]
+  end.else do
+    nats_machines = link(nats_link_name).instances.map { |instance| instance.address }
+  end
+end
+nats['hosts'] = nats_machines.map { |hostname| {'hostname' => hostname, 'port' => nats_port} }
+
+nats_user = property_or_link(
+  'NATS server username',
+  'nats.user',
+  "nats.user",
+  link_name=nats_link_name,
+  optional=true,
+)
+if nats_user
+  nats['user'] = nats_user
+end
+nats_pass = property_or_link(
+  'NATS server username',
+  'nats.password',
+  "nats.password",
+  link_name=nats_link_name,
+  optional=true,
+)
+if nats_pass
+  nats['pass'] = nats_pass
+end
+
+{ "nats" => nats }.to_yaml[3..-1]
+%>
 
 start_response_delay_interval: <%= p("promfetcher.start_response_delay_interval") %>
 droplet_stale_threshold: <%= p("promfetcher.droplet_stale_threshold") %>
