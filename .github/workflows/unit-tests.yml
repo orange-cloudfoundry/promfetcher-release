@@ -24,5 +24,6 @@ jobs:
           set -x
           bundle install
           gem install rspec
+          gem install bosh-template
           rspec
 
