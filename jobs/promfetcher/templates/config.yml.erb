@@ -34,18 +34,10 @@ if p("nats.tls_enabled")
     raise 'nats.ca_certs must be provided as a single string block'
   end
 
-  nats_cert_chain = property_or_link(
-    'NATS client certificate',
-    'nats.cert_chain',
-    "nats.client.tls.certificate",
-    link_name=nats_link_name,
-  )
-  nats_private_key = property_or_link(
-    'NATS client private key',
-    'nats.private_key',
-    "nats.client.tls.private_key",
-    link_name=nats_link_name,
-  )
+  nats_cert_chain = ''
+  nats_private_key = ''
+  if_p("nats.cert_chain") { |val| nats_cert_chain = val }
+  if_p("nats.private_key") { |val| nats_private_key = val }
 
   if (nats_cert_chain != '') ^ (nats_private_key != '')
     raise 'nats.cert_chain and nats.private_key must be both provided or not at all'
