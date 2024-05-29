@@ -2,7 +2,10 @@
 name: promfetcher
 
 templates:
+  dns/aliases.json.erb: dns/aliases.json
+  bpm.yml: config/bpm.yml
   config.yml.erb: config/config.yml
+  drain.sh: bin/drain
 
 packages:
   - promfetcher
