@@ -1,6 +1,23 @@
 ---
 
 <%=
+def property_or_link(description, property, link_path, link_name=nil, optional=false)
+  link_name ||= link_path.split('.').first
+  if_p(property) do |prop|
+    return prop
+  end.else do
+    if_link(link_name) do |link_object|
+      link_object.if_p(link_path) do |prop|
+        return prop
+      end
+    end
+  end
+  if optional
+    return nil
+  end
+  raise RuntimeError, "#{description} not found in properties nor in \"#{link_name}\" link. This value can be specified using the \"#{property}\" property."
+end
+
 nats = {}
 
 nats_link_name = 'nats'
