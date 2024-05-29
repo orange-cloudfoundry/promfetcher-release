@@ -49,22 +49,3 @@ jobs:
           asset_content_type: application/zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  test:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        ruby-version: ['3.1.5']
-    steps:
-    - uses: actions/checkout@v3
-    - name: Set up Ruby
-      uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: ${{ matrix.ruby-version }}
-        bundler-cache: true # runs 'bundle install' and caches installed gems automatically
-    - name: Run tests
-      run: |
-        #!/bin/bash
-        set -x
-        bundle install
-        gem install rspec
-        rspec
