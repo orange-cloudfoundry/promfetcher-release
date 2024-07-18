@@ -63,6 +63,9 @@ properties:
   promfetcher.disable_keep_alives:
     description: "Disable keep alive"
     default: false
+  promfetcher.idle_conn_timeout:
+    default: 30
+    description: "Timeout for idle connections (keepalive connections)"
 
   promfetcher.database.user:
     description: ""
