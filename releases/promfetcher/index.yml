@@ -255,6 +255,8 @@ builds:
     version: 1.40.0
   a5456c70-6f2e-493a-4abd-1a82e65c36e1:
     version: 0.33.0
+  a5cd9187-2aa0-461a-54eb-0cf7c5c97dfa:
+    version: 1.49.0
   a87fa3f1-c363-4659-6d38-899b675ed79f:
     version: 0.46.0
   a968fb9f-dc76-4b50-7f02-8ebc3face1ae:
