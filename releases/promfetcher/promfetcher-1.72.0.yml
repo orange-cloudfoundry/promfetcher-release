@@ -1,0 +1,47 @@
+name: promfetcher
+version: 1.72.0
+commit_hash: 960493c
+uncommitted_changes: false
+jobs:
+- name: bbr-promfetcherdb
+  version: 5b695ad1b523a6d74ae9da254aa84aadf27e309d387e6d59cb0e80ccebe3cb09
+  fingerprint: 5b695ad1b523a6d74ae9da254aa84aadf27e309d387e6d59cb0e80ccebe3cb09
+  sha1: sha256:58040fe5ae04e07d2aaf682f84b05a7d96c2a357ebe875735353f87b7a40ac84
+  packages: []
+- name: promfetch-broker-registrar
+  version: 28ae6f544593232b07fea1eafb5f54d5c709423484b909677ddefe25bf9cedd9
+  fingerprint: 28ae6f544593232b07fea1eafb5f54d5c709423484b909677ddefe25bf9cedd9
+  sha1: sha256:e209eeb44719ff6b2ed6abefe8c6ca46fd4b365783cd7b7908c6710728337421
+  packages:
+  - cf-cli-6-linux
+- name: promfetcher
+  version: 9f7f5dcf6947c142ebaec381f2b2d0073bf84d34b5ea622d46b43ea896376841
+  fingerprint: 9f7f5dcf6947c142ebaec381f2b2d0073bf84d34b5ea622d46b43ea896376841
+  sha1: sha256:b0fb41b45d152f99526c428db5e6a1b0588e50bd5e81c529eaaf3afa084a72b3
+  packages:
+  - promfetcher
+- name: promfetcher_alerts
+  version: 0cc29fa1d6517fcfada35f0bb1be42745fd51d6271a8545b2af469dd01bb7737
+  fingerprint: 0cc29fa1d6517fcfada35f0bb1be42745fd51d6271a8545b2af469dd01bb7737
+  sha1: sha256:db4d6e7b1b9e010f654163f69d69946cbf1bc0838ae227f48190f789faf46223
+  packages: []
+- name: promfetcher_dashboards
+  version: 8a6ecd0a1fea1a3c5a4a85957cac176ce972ad5fcb4cd4bf40bad1b2dbfba985
+  fingerprint: 8a6ecd0a1fea1a3c5a4a85957cac176ce972ad5fcb4cd4bf40bad1b2dbfba985
+  sha1: sha256:5a35e894f031d07d0c914cb0e1489774c3f527109866335f81ed500a06eeabe8
+  packages: []
+packages:
+- name: cf-cli-6-linux
+  version: af6517f138b3ed0584b263f6273f30f22f6e5c9d
+  fingerprint: af6517f138b3ed0584b263f6273f30f22f6e5c9d
+  sha1: 49c68230bc07d100e34e8505d637e077c5dd68ed
+  dependencies: []
+- name: promfetcher
+  version: e56bb0117142dfd2335bd4a8a9e0e721183e61b5a5527fdccbf6dd183c7ca07f
+  fingerprint: e56bb0117142dfd2335bd4a8a9e0e721183e61b5a5527fdccbf6dd183c7ca07f
+  sha1: sha256:20ae06e8b12833f246f116736e2f98dd5df79db3508e6509c1c98594c42c17cd
+  dependencies: []
+license:
+  version: bb07be9bd93bcf33eb7b7beb8874200b8b9a7f4335f5b315c53c4399c1bcbc1d
+  fingerprint: bb07be9bd93bcf33eb7b7beb8874200b8b9a7f4335f5b315c53c4399c1bcbc1d
+  sha1: sha256:51517c19f0be78efd6ce3941644e05646396303a6ffb1a72824c406040396010
